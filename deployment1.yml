@@ -5,7 +5,13 @@ metadata:
         labels:
                 app: nginx-deploy
 spec:
-        replicas: 3
+        replicas: 25
+        strategy:
+                rollingUpdate:
+                        maxSurge: 25%
+                        maxUnavailable: 3
+                type: RollingUpdate
+
         selector:
                 matchLabels:
                         app: myapp
@@ -13,7 +19,8 @@ spec:
                 metadata:
                         labels:
                                 app: myapp
+                                type: dev
                 spec:
                         containers:
-                                - image: nginx
+                                - image: coolgourav147/nginx-custom:v1
                                   name: nginx
