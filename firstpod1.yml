@@ -1,21 +1,9 @@
 apiVersion: v1 
 kind: Pod
 metadata:
-        name: myfirstpod
-        labels:
-                env: prod
+        name: replicapod3
 spec:
         containers:
-                - name: container1
-                  image: coolgourav147/nginx-custom
-                  env:
-                          - name: DEMO
-                            value: "Welcome to Kubernetes"
-                          - name: DEMO2
-                            value: "Hii its done"
-                  args: ["sleep", "3600"]
-
-
-                - name: container2
+                - name: nginx
                   image: coolgourav147/nginx-custom
 

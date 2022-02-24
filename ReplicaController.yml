@@ -6,6 +6,8 @@ metadata:
                 appname: voatingapp
 spec:
         replicas: 5
+        selector:
+                type: app
         template:
                 metadata:
                         name: nginx

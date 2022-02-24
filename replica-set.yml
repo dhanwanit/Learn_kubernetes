@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-        name: replicaset01
+        name: replicaset02
         labels:
-                app: myapp
-                type: dev
+                app: replica
+                env: deiv
+                
 spec:
         replicas: 3
         selector:
-                matchLabels:
-                        app: myapp
+                matchExpressions:
+                       - key: env
+                         operator: DoesNotExist
+                     
         template:
                 metadata:
                         name: replicaset-pod
-                        labels:
-                                app: myapp
-                                type: dev
                 spec:
                         containers:
                                 - name: nginx
