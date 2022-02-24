@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+        name: replicationcontroller1
+        labels:
+                appname: voatingapp
+spec:
+        replicas: 5
+        template:
+                metadata:
+                        name: nginx
+                        labels:
+                                type: app
+                spec:
+                        containers:
+                                - name: nginx
+                                  image: nginx
+
