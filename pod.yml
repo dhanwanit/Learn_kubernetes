@@ -6,6 +6,8 @@ metadata:
         name: nginx-deploy
 spec:
         replicas: 3
+        strategy:
+                type: Recreate
         selector:
                 matchLabels:
                         type: dev
@@ -15,6 +17,6 @@ spec:
                                 type: dev
                 spec:
                         containers:
-                                - image: nginx
+                                - image: coolgourav147/nginx-custom:v2
                                   name: nginx
 
