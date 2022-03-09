@@ -2,11 +2,11 @@ apiVersion: v1
 kind: Pod
 metadata:
         name: nginx-app
-        namespace: app
 
         labels:
-                app: myapp2
+                app: myapp
                 type: dev
+        namespace: dev
 
 spec:
    containers:
