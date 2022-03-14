@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+ name: configpod
+ labels: 
+   type: dev
+
+spec:
+        containers: 
+          - name: nginx
+            image: nginx
+            env: 
+              - name: FROMFILE
+                valueFrom: 
+                  configMapKeyRef: 
+                    key: fromfile.properties
+                    name: fromfile
+
+
+
+
