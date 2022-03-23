@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: configmapasfile
+  labels: 
+    type: dev
+spec:
+        containers: 
+         - name: nginx
+           image: nginx
+           volumeMounts: 
+            - mountPath: "/config"
+              name: configmapvolume
+              readOnly: true
+        volumes:
+                - name: configmapvolume
+                  configMap:
+                          name: emenv
+
+
