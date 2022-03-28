@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pv-pod
+spec: 
+  
+  containers: 
+     - image: nginx
+       name: nginx
+         
+       ports: 
+         - containerPort: 80
+           name: 'httpd-server'
+       volumeMounts: 
+         - mountPath: "/mnt/tmp"
+           name: pv-vol
+  nodeSelector: 
+    size: small
+  volumes:
+           - name: pv-vol
+             persistentVolumeClaim: 
+               claimName: local-storage-claim
+
+              

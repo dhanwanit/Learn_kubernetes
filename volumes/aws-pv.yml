@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+        name: awsebs-pv
+spec:
+        capacity: 
+          storage: 20Gi
+        accessModes: 
+          - ReadWriteOnce
+        persistentVolumeReclaimPolicy: Retain
+        storageClassName: aws-ebs
+        local:
+                path: /tmp/data
+        nodeAffinity:  
+          required:  
+            nodeSelectorTerms: 
+             - matchExpressions: 
+                 - key: kubernets.io/hostname
+                   operator: In
+                   values:
+                           - ip-172-31-3-237
+
+
