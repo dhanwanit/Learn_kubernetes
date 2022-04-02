@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+   name: share3-pv
+spec: 
+   accessModes: 
+    - ReadWriteMany
+   capacity: 
+     storage: 1Gi
+   volumeMode: Filesystem
+   persistentVolumeReclaimPolicy: Recycle
+   mountOptions:  
+     - hard
+     - nfs=4.1
+   nfs: 
+      path: /mnt/share3
+      server: master
+
+  

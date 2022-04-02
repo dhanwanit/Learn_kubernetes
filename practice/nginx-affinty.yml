@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx-affinty
+  name: nginx-affinty
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-affinty
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+       maxSurge: 25%
+       maxUnavailable: 25%
+
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx-affinty
+    spec:
+      affinity: 
+         nodeAffinity: 
+            requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms: 
+                  - matchExpressions: 
+                    - key: type
+                      operator: In
+                      values: 
+                        - ssd
+
+      volumes: 
+        - name: nginxvol
+          hostPath: 
+           path: /tmp/data     
+      containers:
+      - image: nginx
+        name: nginx 
+        volumeMounts: 
+           - name: nginxvol
+             mountPath: /var/www/html
+        resources: 
+          limits: 
+            cpu: 200m
+            memory: 400Mi
+          requests: 
+            cpu: 100m
+            memory: 200Mi
+
+                   
+
+status: {}

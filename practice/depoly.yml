@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: local-pv-dep
+  name: local-pv-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: local-pv-dep
+  template:
+    metadata:
+      labels:
+        app: local-pv-dep
+    spec:
+      nodeSelector:
+              type: pv
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts: 
+         - name: local-vol 
+           mountPath: /var/www/html
+      volumes: 
+      - name: local-vol
+        persistentVolumeClaim: 
+          claimName: local-storage-claim

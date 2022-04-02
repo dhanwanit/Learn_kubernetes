@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx-pod-affnity
+  name: nginx-pod-affnity
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx-pod-affnity
+  strategy: 
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx-pod-affnity
+    spec:
+      affinity: 
+         podAffinity: 
+            requiredDuringSchedulingIgnoredDuringExecution: 
+             - labelSelector: 
+                  matchExpressions: 
+                  - key: app
+                    operator: In
+                    values: 
+                     - nginx-affinity
+               topologyKey: failure-domain.beta.kubernetes.io/zone
+                           
+      volumes: 
+       - name: nginx-vol
+         hostPath: 
+            path: /tmp/data
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts: 
+          - mountPath: /var/www/html
+            name: nginx-vol
+        resources: 
+         limits: 
+            memory: 300Mi
+         requests: 
+            memory: 200Mi
+status: {}
