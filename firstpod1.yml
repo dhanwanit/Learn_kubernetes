@@ -1,9 +1,9 @@
 apiVersion: v1 
 kind: Pod
 metadata:
-        name: replicapod3
+        name: ubuntu-pod
 spec:
         containers:
-                - name: nginx
-                  image: coolgourav147/nginx-custom
+                - name: ubuntu
+                  image: ubuntu
 

@@ -8,16 +8,6 @@ spec:
         accessModes: 
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Retain
-        storageClassName: aws-ebs
-        local:
-                path: /tmp/data
-        nodeAffinity:  
-          required:  
-            nodeSelectorTerms: 
-             - matchExpressions: 
-                 - key: kubernets.io/hostname
-                   operator: In
-                   values:
-                           - ip-172-31-3-237
+        storageClassName: gold
 
 
